@@ -48,6 +48,21 @@ public class UnconditionalSorterTest<U extends Comparable<U>> {
 	public static Collection<Object[]> data() {
 		List<Object[]> data = new ArrayList<Object[]>();
 		data.add(new Object[]{String.class, new String[]{"a", "b"}});
+		data.add(new Object[]{String.class, new String[]{"b", "a"}});
+		data.add(new Object[]{String.class, new String[]{"a", "b", "c"}});
+		data.add(new Object[]{String.class, new String[]{"a", "c", "b"}});
+		data.add(new Object[]{String.class, new String[]{"b", "a", "c"}});
+		data.add(new Object[]{String.class, new String[]{"b", "c", "a"}});
+		data.add(new Object[]{String.class, new String[]{"c", "a", "b"}});
+		data.add(new Object[]{String.class, new String[]{"c", "b", "a"}});
+		data.add(new Object[]{Integer.class, new Integer[]{0, 1}});
+		data.add(new Object[]{Integer.class, new Integer[]{1, 0}});
+		data.add(new Object[]{Integer.class, new Integer[]{0, 1, 2}});
+		data.add(new Object[]{Integer.class, new Integer[]{0, 2, 1}});
+		data.add(new Object[]{Integer.class, new Integer[]{1, 0, 2}});
+		data.add(new Object[]{Integer.class, new Integer[]{1, 2, 0}});
+		data.add(new Object[]{Integer.class, new Integer[]{2, 0, 1}});
+		data.add(new Object[]{Integer.class, new Integer[]{2, 1, 0}});
 		return data;
 
 	}
