@@ -10,26 +10,35 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.effrefax.challenge.tree.Leaf;
+import org.effrefax.challenge.tree.SortTree;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class UnconditionalSorterTest<U extends Comparable<U>> {
-	private final Comparator<U> naturalOrder;
-	private final List<U> expected;
+public class SortTreeTest<T extends Comparable<T>> {
 
-	public UnconditionalSorterTest(Class<U> aClass, U[] expected) {
+	private final Class<T> aClass;
+	private final Comparator<T> naturalOrder;
+	private final List<T> expected;
+
+	public SortTreeTest(Class<T> aClass, T[] expected) {
+		this.aClass = aClass;
 		this.naturalOrder = naturalOrder(aClass);
 		this.expected = Arrays.asList(expected);
 	}
 
 	@Test
-	public void shouldCorrectlySortStrings() {
-		Sorter<U> sorter = new UnconditionalSorter<U>(naturalOrder);
+	public void shouldCreateCorrectSortTree() {
+		SortTree<T> tree = new Leaf<T>(naturalOrder);
+		List<T> actual = new ArrayList<T>();
 
-		List<U> actual = sorter.sort(expected);
+		for(T word : expected) {
+			tree = tree.add(word);
+		}
+		tree.collect(actual);
 
 		Collections.sort(expected, naturalOrder);
 		assertEquals(expected, actual);
@@ -38,6 +47,9 @@ public class UnconditionalSorterTest<U extends Comparable<U>> {
 	@Parameters
 	public static Collection<Object[]> data() {
 		List<Object[]> data = new ArrayList<Object[]>();
+		data.add(new Object[]{String.class, new String[]{}});
+		data.add(new Object[]{String.class, new String[]{"a"}});
+		data.add(new Object[]{String.class, new String[]{"b"}});
 		data.add(new Object[]{String.class, new String[]{"a", "b"}});
 		data.add(new Object[]{String.class, new String[]{"b", "a"}});
 		data.add(new Object[]{String.class, new String[]{"a", "b", "c"}});
@@ -46,15 +58,8 @@ public class UnconditionalSorterTest<U extends Comparable<U>> {
 		data.add(new Object[]{String.class, new String[]{"b", "c", "a"}});
 		data.add(new Object[]{String.class, new String[]{"c", "a", "b"}});
 		data.add(new Object[]{String.class, new String[]{"c", "b", "a"}});
-		data.add(new Object[]{Integer.class, new Integer[]{0, 1}});
-		data.add(new Object[]{Integer.class, new Integer[]{1, 0}});
-		data.add(new Object[]{Integer.class, new Integer[]{0, 1, 2}});
-		data.add(new Object[]{Integer.class, new Integer[]{0, 2, 1}});
-		data.add(new Object[]{Integer.class, new Integer[]{1, 0, 2}});
-		data.add(new Object[]{Integer.class, new Integer[]{1, 2, 0}});
-		data.add(new Object[]{Integer.class, new Integer[]{2, 0, 1}});
-		data.add(new Object[]{Integer.class, new Integer[]{2, 1, 0}});
 		return data;
 
 	}
+
 }
