@@ -12,3 +12,8 @@ Jason Gorman posed [a challenge](https://twitter.com/?category=people#!/jasongor
 
 I took him up on the challenge and this is my response.
 
+Feedback
+--------
+
+I love to hear your feedback. Check the [points of critique](https://github.com/dvberkel/unconditional-sorting/issues/1)
+and add your insights.
